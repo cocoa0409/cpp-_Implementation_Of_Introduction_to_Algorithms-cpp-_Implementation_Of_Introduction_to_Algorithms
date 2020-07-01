@@ -1,5 +1,23 @@
 #ifndef insertsort_h
 #define insertsort_h
+
+
+void insert_sort(std::vector<int>::iterator begin,std::vector<int>::iterator end){
+    if(std::distance(begin, end)<=1) return;
+    auto current=begin+1;
+    while(current!=end){
+        auto pos=current;
+        int current_v=*current;
+        while(pos!=begin and *(pos-1) > current_v){
+            *pos=*(pos-1);
+            pos--;
+        }
+        *pos=current_v;
+        current++;
+    }
+}
+
+
 namespace IntroductionToAlgorithm
 {
     namespace SortAlgorithm
@@ -16,7 +34,7 @@ namespace IntroductionToAlgorithm
     * - 时间复杂度 O(n^2)
     * - 原地排序
     */
-        template<typename Iterator,typename CompareType=std::less<typename std::iterator_traits<Iterator>::value_type>>
+            template<typename Iterator,typename CompareType=std::less<typename std::iterator_traits<Iterator>::value_type>>
                     void insert_sort(const Iterator begin,const Iterator end,CompareType compare=CompareType()){
              typedef typename std::iterator_traits<Iterator>::value_type T;// 迭代器指向对象的值类型
              size_t size=std::distance(begin, end);
@@ -39,6 +57,7 @@ namespace IntroductionToAlgorithm
         }
     }
 }
+
 
 
 

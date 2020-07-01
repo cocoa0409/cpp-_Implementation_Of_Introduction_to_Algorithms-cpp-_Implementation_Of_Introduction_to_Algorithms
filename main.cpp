@@ -9,8 +9,12 @@
 #include <gtest/gtest.h>
 #include "src/sort_algorithms/insert_sort/insertsort_test.h"
 #include "src/sort_algorithms/merge_sort/mergesort_test.h"
+#include "src/sort_algorithms/quick_sort/quicksort_test.h"
+#include "src/sort_algorithms/heap_sort/heapsort_test.h"
+
+
 
 int main(int argc,char** argv){
-    ::testing::InitGoogleTest(&argc,argv);
+    testing::InitGoogleTest(&argc,argv);
     return RUN_ALL_TESTS();
 }

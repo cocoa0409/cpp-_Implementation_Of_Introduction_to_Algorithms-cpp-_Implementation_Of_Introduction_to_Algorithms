@@ -1,6 +1,46 @@
 #ifndef MERGESORTE_H
 #define MERGESORTE_H
 #include<vector>
+
+void merge(std::vector<int>::iterator begin,std::vector<int>::iterator end,std::vector<int>::iterator mid){
+    std::vector<int> res(begin,end);
+    auto lb=begin;
+    auto rb=mid;
+    
+    auto rescurr=res.begin();
+    
+    while(lb!=mid and rb!=end){
+        if(*lb<*rb){
+            *(rescurr++)=*(lb++);
+        }
+        else{
+            *(rescurr++)=*(rb++);
+        }
+    }
+    if(lb==mid){
+        std::copy(rb,end,rescurr);
+    }
+    else{
+        std::copy(lb,mid,rescurr);
+    }
+    std::copy(res.begin(),res.end(),begin);
+}
+
+void mergesort(std::vector<int>::iterator begin,std::vector<int>::iterator end){
+    size_t size=std::distance(begin, end);
+    if(size<=1) return;
+    
+    auto mid = begin+size/2;
+    mergesort(begin, mid);
+    mergesort(mid, end);
+    merge(begin, end, mid);
+}
+
+
+
+
+
+
 namespace IntroductionToAlgorithm
 {
     namespace SortAlgorithm
