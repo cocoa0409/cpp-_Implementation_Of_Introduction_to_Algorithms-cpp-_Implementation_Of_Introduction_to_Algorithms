@@ -15,6 +15,7 @@
 #include "src/sort_algorithms/radix_sort/radixsort_test.h"
 #include "src/sort_algorithms/bucket_sort/bucketsort_test.h"
 
+#include "src/queue_algorithms/minqueue_test.h"
 int main(int argc,char** argv){
     testing::InitGoogleTest(&argc,argv);
     return RUN_ALL_TESTS();
