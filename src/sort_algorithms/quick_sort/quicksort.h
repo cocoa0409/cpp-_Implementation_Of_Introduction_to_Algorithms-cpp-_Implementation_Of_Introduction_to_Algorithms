@@ -9,6 +9,40 @@
 #ifndef quicksort_h
 #define quicksort_h
 #include<assert.h>
+
+std::vector<int>::iterator partition(std::vector<int>::iterator begin,std::vector<int>::iterator end,std::vector<int>::iterator partition_iter){
+    auto current = begin;
+    auto small_next = begin;
+    
+    std::swap(*partition_iter,*(end-1));
+    while(current!=end-1){
+        if(*current<*(end-1)){
+            std::swap(*current,*small_next);
+            small_next++;
+            current++;
+        }
+        else{
+            current++;
+        }
+    }
+    std::swap(*small_next,*(end-1));
+    return small_next;
+    
+}
+
+void quick_sort(std::vector<int>::iterator begin,std::vector<int>::iterator end){
+    if(std::distance(begin, end)<=1) return;
+    auto it = partition(begin, end, end-1);
+    quick_sort(begin, it);
+    quick_sort(it+1, end);
+}
+
+
+
+
+
+
+
 namespace IntroductionToAlgorithm
 {
     namespace SortAlgorithm

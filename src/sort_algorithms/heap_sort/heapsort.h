@@ -1,5 +1,68 @@
 #ifndef HEAP_SORT
 #define HEAP_SORT
+
+void heapify(std::vector<int> & v,size_t idx){
+    size_t size=v.size()-1;
+    if( size==0 or idx > (size-1)/2) return;   //说明idx没有孩子节点
+    
+    bool left_not_empty=true;
+    bool right_not_empty= size>=2 and idx <= ((size-2)/2) ; //idx有右孩子
+    
+    bool left_next=false;
+    bool right_next=false;
+    
+    int curmax=v[idx];
+    
+    if(curmax>v[(idx*2)+1]){
+        left_next=true;
+        curmax=v[(idx*2)+1];
+    }
+    if(right_not_empty==true and curmax>v[(idx*2)+2]){
+        left_next=false;
+        right_next=true;
+        curmax=v[(idx*2)+2];
+    }
+    
+    if(left_next){
+        std::swap(v[idx],v[(idx*2)+1]);
+        heapify(v, (idx*2)+1);
+    }
+    else if(right_next){
+        std::swap(v[idx],v[(idx*2)+2]);
+        heapify(v, (idx*2)+2);
+    }
+}
+
+void makeheap(std::vector<int> & v){
+    size_t size=v.size()-1;
+    for(int i=(size-1)/2;i>=0;i--){
+        heapify(v, i);
+    }
+    return;
+}
+
+void heapsort(std::vector<int> & v){
+    makeheap(v);
+    std::vector<int> res;
+    for(int i=v.size()-1;i>0;i--){
+        res.push_back(v.front());
+        std::swap(v.front(),v.back());
+        v.pop_back();
+        heapify(v, 0);
+    }
+    res.push_back(v.front());
+    v=res;
+}
+
+
+
+
+
+
+
+
+
+
 namespace IntroductionToAlgorithm
 {
     namespace SortAlgorithm
@@ -55,7 +118,7 @@ namespace IntroductionToAlgorithm
             *
             * 从后一半的元素开始依次向前调用heapify操作（根据最大堆性质，除了最底层它是完全充满的）
             *
-            * - 时间复杂度 O(nlogn)
+            * - 时间复杂度 O(n)
             * - 原地操作
             */
             void _setupHeap(CompareType compare=CompareType())
@@ -78,7 +141,7 @@ namespace IntroductionToAlgorithm
             * 首先调用比较该节点与左右子节点的最大值。如果最大值为它本身，则维持了性质，返回；如果最大值不是它本身，那么必然为左、右子节点之一。
             * 将该最大节点（假设为左子节点）交换到根节点，然后以左子节点递归调用heapify操作
             *
-            * - 时间复杂度 O(n)
+            * - 时间复杂度 O(lgn)
             * - 原地操作
             */
             void _heapify(std::size_t elementIndex,CompareType compare=CompareType())

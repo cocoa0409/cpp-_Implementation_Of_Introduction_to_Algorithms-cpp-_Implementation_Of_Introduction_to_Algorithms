@@ -83,4 +83,30 @@ TEST(test_heap_sort, test_std_container)
     EXPECT_EQ(data3,comparedata3);
     EXPECT_EQ(data4,comparedata4);
 }
+
+TEST(test_heap_sort_int, test_std_container)
+{
+    std::vector<int> data1={1,2,3,4,5,6,7,8,9,10};
+    std::vector<int> data2={10,9,8,7,6,5,4,3,2,1};
+    std::vector<int> data3={5,5,5,5,5,4,4,4,4,4};
+    std::vector<int> data4={5};
+    std::vector<int> comparedata1={1,2,3,4,5,6,7,8,9,10};
+    std::vector<int> comparedata2={10,9,8,7,6,5,4,3,2,1};
+    std::vector<int> comparedata3={5,5,5,5,5,4,4,4,4,4};
+    std::vector<int> comparedata4={5};
+
+    std::sort(comparedata1.begin(),comparedata1.end());
+    heapsort(data1);
+    std::sort(comparedata2.begin(),comparedata2.end());
+    heapsort(data2);
+    std::sort(comparedata3.begin(),comparedata3.end());
+    heapsort(data3);
+    std::sort(comparedata4.begin(),comparedata4.end());
+    heapsort(data4);
+    EXPECT_EQ(data1,comparedata1);
+    EXPECT_EQ(data2,comparedata2);
+    EXPECT_EQ(data3,comparedata3);
+    EXPECT_EQ(data4,comparedata4);
+}
+
 #endif // HEAP_SORT_TEST
